@@ -14,7 +14,6 @@ class MyApp extends StatefulWidget {
 
 Future<void> _speakInBackground() async {
   final flutterTts = FlutterTts();
-  flutterTts.setVolume(1.0);
   flutterTts.speak('Test announcement');
   print('Test announcement');
   await Future.delayed(const Duration(minutes: 1));
@@ -24,7 +23,8 @@ Future<void> _speakInBackground() async {
 Future<void> _regularlyPlaySilenceToKeepAudioWorkingInBackgroundOnIOS() async {
   final flutterTts = FlutterTts();
   flutterTts.setVolume(0.0);
-  flutterTts.speak('a');
+  await flutterTts.speak('a');
+  flutterTts.setVolume(1.0);
   print('Playing silence');
   await Future.delayed(const Duration(seconds: 15));
   _regularlyPlaySilenceToKeepAudioWorkingInBackgroundOnIOS();
